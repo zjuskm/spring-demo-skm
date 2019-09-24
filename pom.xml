@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--    <parent>-->
+    <!--        <groupId>org.springframework.boot</groupId>-->
+    <!--        <artifactId>spring-boot-starter-parent</artifactId>-->
+    <!--        <version>2.0.0.RELEASE</version>-->
+    <!--        <relativePath/>-->
+    <!--    </parent>-->
+
+    <groupId>skm</groupId>
+    <artifactId>spring-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>2.0.0.RELEASE</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <spring.version>2.0.0.RELEASE</spring.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jul-to-slf4j</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>logback-classic</artifactId>
+                    <groupId>ch.qos.logback</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>logback-core</artifactId>
+                    <groupId>ch.qos.logback</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j</artifactId>
+            <version>1.2.7.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jul-to-slf4j</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.48</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-redis</artifactId>-->
+<!--            <version>1.4.2.RELEASE</version>-->
+<!--            <exclusions>-->
+<!--                &lt;!&ndash; spring  默认使用lettuce作为redis客户端驱动&ndash;&gt;-->
+<!--                <exclusion>-->
+<!--                    <artifactId>lettuce-core</artifactId>-->
+<!--                    <groupId>io.lettuce</groupId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash;使用jedis驱动&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>redis.clients</groupId>-->
+<!--            <artifactId>jedis</artifactId>-->
+<!--            <version>3.0.0</version>-->
+<!--        </dependency>-->
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <envcfg.dir>dev</envcfg.dir>
+                <xmf.version>1</xmf.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>test-out</id>
+            <properties>
+                <envcfg.dir>test-out</envcfg.dir>
+                <xmf.version>1</xmf.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <properties>
+                <envcfg.dir>uat</envcfg.dir>
+                <xmf.version>2</xmf.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>product</id>
+            <properties>
+                <envcfg.dir>product</envcfg.dir>
+                <xmf.version>2</xmf.version>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <finalName>spring-demo-skm</finalName>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <outputDirectory>target/classes</outputDirectory>
+        <testOutputDirectory>target/test-classes</testOutputDirectory>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+        </testResources>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/conf/${envcfg.dir}</directory>
+            </resource>
+        </resources>
+        <directory>${project.basedir}/target</directory>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>artifactory</id>
+            <name>nali-releases</name>
+            <url>http://artifactory.ximalaya.com/artifactory/ximalaya-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>artifactory</id>
+            <name>nali-snapshots</name>
+            <url>http://artifactory.ximalaya.com/artifactory/ximalaya-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <repositories>
+        <repository>
+            <id>artifactory-central</id>
+            <url>http://artifactory.ximalaya.com/artifactory/repo</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>artifactory-snapshots</id>
+            <url>http://artifactory.ximalaya.com/artifactory/repo</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+</project>
